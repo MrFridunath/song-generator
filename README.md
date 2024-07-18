@@ -2,11 +2,16 @@
 
 Web app desarrollada para el Hackathon de Vercel y MiduDev de Julio de 2024
 
+## TECNOLOGÍA
+- Front-end creado con Angular y Angular Material versión 17
+- Back-end creado en Javascript con Express.js y Node.js y uso del SDK de Vercel
+
 ## PRE REQUISITOS
 1. [Node 20+][1]
-2. Clonar y ejecutar el repositorio en local: [suno-api][2]
-3. Tener un certificado (cert.pem) y clave (key.pem) SSL en el directorio /back/server/certificates, para ejecutar el servidor con HTTPS
-4. Renombrar el fichero .env.example a .env, poniendo las variables de entorno respectivas a las API Keys de: [ChatGPT][3], [Gemini][4], [Llama (Perplexity)][5] y [Claude (Anthropic)][6]
+2. Clonar y ejecutar el repositorio en local: [suno-api][2] (asegúrate de poner la Cookie en
+.env, siguiendo los pasos del apartado Getting Started)
+3. Tener un certificado `cert.pem` y clave `key.pem` SSL en el directorio `/back/server/certificates`, para ejecutar el servidor con `HTTPS`
+4. Renombrar el fichero `.env.example` a `.env`, poniendo las variables de entorno respectivas a las API Keys de: [ChatGPT][3], [Gemini][4], [Llama (Perplexity)][5] y [Claude (Anthropic)][6]
 
 ## INSTALACIÓN Y COMPILACIÓN
 ```
