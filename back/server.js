@@ -733,20 +733,13 @@ async function generateDescriptionClaude(apiKey, language) {
     return result;
 }
 
-//import { generateText } from 'ai';
-//const { Configuration, OpenAIApi } = require("openai");
-//import { openai } from '@ai-sdk/openai';
-//const { OpenAIStream, StreamingTextResponse } = require('ai');
-//const { openai } = require("@ai-sdk/openai");
-//import { openai } from '@ai-sdk/openai'
-
 const hostnameSuno = 'localhost';
 
 const app = express();
 
 const credentials = {
-	key: fs.readFileSync('server/certificates/key.pem'),
-	cert: fs.readFileSync('server/certificates/cert.pem')
+	key: fs.readFileSync('back/server/certificates/key.pem'),
+	cert: fs.readFileSync('back/server/certificates/cert.pem')
 };
 
 const server = http.createServer(function (req, res) {
