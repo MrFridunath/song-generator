@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>{{data.song.title}}</h1>
+<mat-dialog-content>
+    <div [innerHTML]="lyrics"></div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close cdkFocusInitial>
+        <ng-container *ngIf="data.language === 'es'">Cerrar</ng-container>
+        <ng-container *ngIf="data.language === 'en'">Close</ng-container>
+    </button>
+</mat-dialog-actions>

@@ -1,0 +1,83 @@
+<h1 mat-dialog-title>
+    <ng-container *ngIf="data.language === 'es'">Créditos</ng-container>
+    <ng-container *ngIf="data.language === 'en'">Credits</ng-container>
+</h1>
+<mat-dialog-content>
+    <div class="bottom-space">
+        <ng-container *ngIf="data.language === 'es'">
+            App web creada para el hackatón organizado por Vercel y MiduDev.
+        </ng-container>
+        <ng-container *ngIf="data.language === 'en'">
+            Web app created for the hackathon organized by Vercel and MiduDev.
+        </ng-container>
+    </div>
+    <div class="bottom-space">
+        <ng-container *ngIf="data.language === 'es'">
+            El front-end ha sido creado usando el framework de Angular.io y Angular Material versión 17.
+        </ng-container>
+        <ng-container *ngIf="data.language === 'en'">
+            The front-end has been created using the Angular.io framework and Angular Material version 17.
+        </ng-container>
+    </div>
+    <div class="bottom-space">
+        <ng-container *ngIf="data.language === 'es'">
+            Para el back-end, se utiliza una API creada por el usuario de GitHub no-se-quien,
+            que permite usar los servicios de la plataforma Suno, de creación de música.
+        </ng-container>
+        <ng-container *ngIf="data.language === 'en'">
+            For the back-end, an API created by GitHub user no-know-who is used,
+            which allows you to use the services of the Suno music creation platform.
+        </ng-container>
+    </div>
+    <div class="bottom-space">
+        <ng-container *ngIf="data.language === 'es'">
+            También se utiliza un servidor y una API creados con Express.js para NodeJS,
+            donde usamos el SDK de Vercel para hacer las generaciones de texto por IA.
+        </ng-container>
+        <ng-container *ngIf="data.language === 'en'">
+            A server and API created with Express.js for NodeJS are also used,
+            where we use the Vercel SDK to do the AI text generations.
+        </ng-container>
+    </div>
+    <div class="bottom-space">
+        <ng-container *ngIf="data.language === 'es'">
+            He dado la posibilidad de utilizar 4 modelos diferentes,
+            para que puedas probar la eficacia o diferencia entre estos modelos.
+            Con API Keys propias exclusivas para este proyecto,
+            pero también puedes utilizar las tuyas si quieres, o ves que falla alguna de las mías.
+        </ng-container>
+        <ng-container *ngIf="data.language === 'en'">
+            I have given the possibility of using 4 different models,
+            so you can test the effectiveness or difference between these models.
+            With your own API Keys exclusive to this project,
+            but you can also use yours if you want, or you see that one of mine fails.
+        </ng-container>
+    </div>
+    <div class="bottom-space">
+        <ng-container *ngIf="data.language === 'es'">
+            La licencia de este proyecto es CC By 4.0.
+        </ng-container>
+        <ng-container *ngIf="data.language === 'en'">
+            The license for this project is CC By 4.0.
+        </ng-container>
+    </div>
+    <div class="bottom-space">
+        <ng-container *ngIf="data.language === 'es'">
+            Espero que te guste este proyecto, tanto como yo he disfrutado creándolo.
+            Un saludo del desarrollador, y...
+        </ng-container>
+        <ng-container *ngIf="data.language === 'en'">
+            I hope you like this project, as much as I enjoyed creating it.
+            Greetings from the developer, and...
+        </ng-container>
+    </div>
+    <div>
+        Happy coding! 
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close cdkFocusInitial>
+        <ng-container *ngIf="data.language === 'es'">Cerrar</ng-container>
+        <ng-container *ngIf="data.language === 'en'">Close</ng-container>
+    </button>
+</mat-dialog-actions>

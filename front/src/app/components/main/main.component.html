@@ -1,0 +1,321 @@
+<div [ngClass]="{'layout': true, 'layout-dark': settings.darkMode, 'layout-white': !settings.darkMode}">
+    <div class="main-container">
+        <div class="header">
+        <div class="left">
+            <img *ngIf="settings.darkMode" src="assets/icons/music_w.png">
+            <img *ngIf="!settings.darkMode" src="assets/icons/music_b.png">
+            <div>
+                AI SONG GENERATOR
+            </div>
+        </div>
+        <div class="right">
+            <div class="model">
+                <button mat-icon-button [matMenuTriggerFor]="modelMenu" [matTooltip]="settings.language === 'es' ? 'Selecciona el modelo a usar' : 'Select the model to use'">
+                    <div class="model-icon">
+                        <img *ngIf="settings.model === 'openai'" src="assets/models-icon/openai.png">
+                        <img *ngIf="settings.model === 'gemini'" src="assets/models-icon/google.png">
+                        <img *ngIf="settings.model === 'llama'" src="assets/models-icon/meta.png">
+                        <img *ngIf="settings.model === 'claude'" src="assets/models-icon/anthropic.png">
+                    </div>
+                </button>
+                <mat-menu #modelMenu="matMenu" xPosition="before" yPosition="below">
+                    <div class="title">
+                        <ng-container *ngIf="settings.language === 'es'">
+                            Selecciona el modelo:
+                        </ng-container>
+                        <ng-container *ngIf="settings.language === 'en'">
+                            Select the model:
+                        </ng-container>
+                    </div>
+                    <button mat-menu-item class="menu-item" (click)="setModel('openai')">
+                    <div class="icon">
+                        <img src="assets/models-icon/openai.png">
+                    </div>
+                    <div>ChatGPT 3.5 Turbo</div>
+                    </button>
+                    <button mat-menu-item class="menu-item" (click)="setModel('gemini')">
+                    <div class="icon">
+                        <img src="assets/models-icon/google.png">
+                    </div>
+                    <div>Gemini 1.5 Pro</div>
+                    </button>
+                    <button mat-menu-item class="menu-item" (click)="setModel('llama')">
+                        <div class="icon">
+                            <img src="assets/models-icon/meta.png">
+                        </div>
+                        <div>Llama 3 70B Instruct</div>
+                    </button>
+                    <button mat-menu-item class="menu-item" (click)="setModel('claude')">
+                        <div class="icon">
+                            <img src="assets/models-icon/anthropic.png">
+                        </div>
+                        <div>Claude 3.5 Sonet</div>
+                    </button>
+                </mat-menu>
+            </div>
+            <div class="settings">
+                <button mat-icon-button [matMenuTriggerFor]="settingsMenu" [matTooltip]="settings.language === 'es' ? 'Configuración' : 'Settings'">
+                    <mat-icon>settings</mat-icon>
+                </button>
+                <mat-menu #settingsMenu="matMenu" xPosition="before" yPosition="below">
+                    <button mat-menu-item (click)="$event.stopPropagation()">
+                        <mat-slide-toggle #darkModeSwitch class="dark-mode"
+                            [checked]="settings.darkMode"
+                            (change)="toggleDarkMode($event)">
+                            <ng-container *ngIf="settings.language === 'es'">
+                                Modo oscuro
+                            </ng-container>
+                            <ng-container *ngIf="settings.language === 'en'">
+                                Dark mode
+                            </ng-container>
+                        </mat-slide-toggle>
+                    </button>
+                    <button mat-menu-item [matMenuTriggerFor]="langMenu">
+                        <mat-icon>translate</mat-icon>
+                        <div>
+                            <ng-container *ngIf="settings.language === 'es'">
+                                Idioma:
+                            </ng-container>
+                            <ng-container *ngIf="settings.language === 'en'">
+                                Language:
+                            </ng-container>
+                        </div>
+                        <div *ngIf="settings.language === 'es'">Español</div>
+                        <div *ngIf="settings.language === 'en'">English</div>
+                    </button>
+                    <button mat-menu-item (click)="setCustomAPIKeys()">
+                        <mat-icon>key</mat-icon>
+                        <div>
+                            <ng-container *ngIf="settings.language === 'es'">
+                                Personalizar API Keys
+                            </ng-container>
+                            <ng-container *ngIf="settings.language === 'en'">
+                                Customize API Keys
+                            </ng-container>
+                        </div>
+                    </button>
+                    <button mat-menu-item (click)="deleteHistory()">
+                        <mat-icon>delete</mat-icon>
+                        <div>
+                            <ng-container *ngIf="settings.language === 'es'">
+                                Borrar historial
+                            </ng-container>
+                            <ng-container *ngIf="settings.language === 'en'">
+                                Delete history
+                            </ng-container>
+                        </div>
+                    </button>
+                </mat-menu>
+                <mat-menu #langMenu="matMenu">
+                    <button mat-menu-item (click)="toggleLanguage('es')"> 
+                        Español
+                    </button>
+                    <button mat-menu-item (click)="toggleLanguage('en')">
+                        English
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+        </div>
+        <div class="content">
+        <div class="title">AI SONG GENERATOR</div>
+        <div class="content-width">
+            <div class="custom">
+            <div class="left">
+                <mat-slide-toggle (change)="onCustomToggle($event)">
+                    <ng-container *ngIf="settings.language === 'es'">
+                        Personalizado
+                    </ng-container>
+                    <ng-container *ngIf="settings.language === 'en'">
+                        Custom
+                    </ng-container>
+                </mat-slide-toggle>
+                <mat-slide-toggle (change)="onInstrumentalToggle($event)">Instrumental</mat-slide-toggle>
+            </div>
+            <div class="right">
+                <div>
+                    <ng-container *ngIf="settings.language === 'es'">
+                        Tokens restantes: {{tokensLeft}}
+                    </ng-container>
+                    <ng-container *ngIf="settings.language === 'en'">
+                        Remaining tokens: {{tokensLeft}}
+                    </ng-container>
+                </div>
+            </div>
+            </div>
+            <mat-card class="card" appearance="outlined">
+            <mat-card-content>
+                <form *ngIf="!custom" [formGroup]="simpleForm" (ngSubmit)="sendDataForm()" id="ngForm" #documentEditForm="ngForm">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>
+                            <ng-container *ngIf="settings.language === 'es'">
+                                Describe la canción
+                            </ng-container>
+                            <ng-container *ngIf="settings.language === 'en'">
+                                Describe the song
+                            </ng-container>
+                        </mat-label>
+                        <textarea matInput formControlName="description" [placeholder]="settings.language === 'es' ? 'Ej. Una canción melancólica con toques de rock...' : 'Ex. A melancholic song with touches of rock...'" required="true"></textarea>
+                    </mat-form-field>
+                    <div [ngClass]="{'options': true, 'options-l': loadingDescription}">
+                        <button [ngClass]="{'gen-t-btn-opacity': loadingDescription}" type="button" mat-icon-button [matTooltip]="settings.language === 'es' ? 'Generar descripción según el modelo elegido' : 'Generate description according to the chosen model'" (click)="generateText('description')" [disabled]="loadingDescription">
+                            <mat-icon class="black-icon">sync</mat-icon>
+                        </button>
+                        <div *ngIf="loadingDescription" class="loading-text">
+                            <mat-spinner [diameter]="30"></mat-spinner>
+                        </div>
+                    </div>
+                </form>
+                <form *ngIf="custom" [formGroup]="customForm" (ngSubmit)="sendDataForm()" id="ngForm" #documentEditForm="ngForm">
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>
+                            <ng-container *ngIf="settings.language === 'es'">
+                                Escribe un título
+                            </ng-container>
+                            <ng-container *ngIf="settings.language === 'en'">
+                                Write a title
+                            </ng-container>
+                        </mat-label>
+                        <input matInput formControlName="title" [placeholder]="settings.language === 'es' ? 'Ej. Never gonna give you up' : 'Ex. Never gonna give you up'">
+                    </mat-form-field>
+                    <div [ngClass]="{'options-m': true, 'options-l': loadingTitle}">
+                        <button [ngClass]="{'gen-t-btn-opacity': loadingTitle}" type="button" mat-icon-button [matTooltip]="settings.language === 'es' ? 'Generar un título según el modelo elegido (rellena otros campos para mayor precisión)' : 'Generate a title according to the chosen model (fill in other fields for greater precision)'" (click)="generateText('title')" [disabled]="loadingTitle">
+                            <mat-icon class="black-icon">sync</mat-icon>
+                        </button>
+                        <div *ngIf="loadingTitle" class="loading-text">
+                            <mat-spinner [diameter]="30"></mat-spinner>
+                        </div>
+                    </div>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>
+                            <ng-container *ngIf="settings.language === 'es'">
+                                Escribe la letra
+                            </ng-container>
+                            <ng-container *ngIf="settings.language === 'en'">
+                                Write the lyrics
+                            </ng-container>
+                        </mat-label>
+                        <textarea matInput formControlName="lyrics" [placeholder]="settings.language === 'es' ? 'Ej. Mi árbol tenía sus ramas de oro. Un viento envidioso robó mi tesoro...' : 'Ex. Shall I compare thee to a summer’s day? Thou art more lovely and more temperate...'"></textarea>
+                    </mat-form-field>
+                    <div [ngClass]="{'options-m': true, 'options-l': loadingLyrics}">
+                        <button [ngClass]="{'gen-t-btn-opacity': loadingLyrics}" type="button" mat-icon-button [matTooltip]="settings.language === 'es' ? 'Generar letra según el modelo elegido (rellena otros campos para mayor precisión)' : 'Generate lyrics according to the chosen model (fill out other fields for greater precision)'" [ngClass]="{'disabled': instrumental}" [disabled]="instrumental" (click)="generateText('lyrics')" [disabled]="loadingLyrics">
+                            <mat-icon class="black-icon">sync</mat-icon>
+                        </button>
+                        <div *ngIf="loadingLyrics" class="loading-text">
+                            <mat-spinner [diameter]="30"></mat-spinner>
+                        </div>
+                    </div>
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>
+                            <ng-container *ngIf="settings.language === 'es'">
+                                Seleccione el género
+                            </ng-container>
+                            <ng-container *ngIf="settings.language === 'en'">
+                                Select the genre
+                            </ng-container>
+                        </mat-label>
+                        <textarea matInput formControlName="genres" [placeholder]="settings.language === 'es' ? 'Ej. rock, pop, trap...' : 'Ex. rock, pop, trap...'"></textarea>
+                    </mat-form-field>
+                    <div class="genre-chips">
+                        <mat-chip-set>
+                            <ng-container *ngIf="settings.language === 'es'">
+                                <mat-chip *ngFor="let genre of genres; let i = index;" (click)="addGenre(i)" [matTooltip]="'Añade el género \'' + genre.es.toLowerCase() + '\' a la mezcla'">{{genre.es}}</mat-chip>
+                            </ng-container>
+                            <ng-container *ngIf="settings.language === 'en'">
+                                <mat-chip *ngFor="let genre of genres; let i = index;" (click)="addGenre(i)" [matTooltip]="'Add the \'' + genre.en.toLowerCase() + '\' genre to the mix'">{{genre.en}}</mat-chip>
+                            </ng-container>
+                        </mat-chip-set>
+                    </div>
+                </form>
+            </mat-card-content>
+            </mat-card>
+            <div class="submit">
+            <button *ngIf="!loading" mat-stroked-button [ngClass]="{'gen-button': true, 'disabled': !isFormValid()}" type="submit" form="ngForm" [disabled]="!isFormValid()">
+                <ng-container *ngIf="settings.language === 'es'">
+                    Generar canción
+                </ng-container>
+                <ng-container *ngIf="settings.language === 'en'">
+                    Generate song
+                </ng-container>
+            </button>
+            <div *ngIf="loading" class="loading">
+                <mat-spinner [diameter]="70"></mat-spinner>
+                <div class="wait">
+                    <ng-container *ngIf="settings.language === 'es'">
+                        El tiempo de espera puede llegar a ser de hasta 5 minutos, por favor, espere pacientemente
+                    </ng-container>
+                    <ng-container *ngIf="settings.language === 'en'">
+                        Waiting time may be up to 5 minutes, please wait patiently
+                    </ng-container>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div *ngIf="savedSongs.length > 0" class="history">
+            <div class="h-title">
+                <ng-container *ngIf="settings.language === 'es'">
+                    Historial de canciones:
+                </ng-container>
+                <ng-container *ngIf="settings.language === 'en'">
+                    Song history:
+                </ng-container>
+            </div>
+            <div class="song-container">
+                <div *ngFor="let song of savedSongs; let i = index" class="h-song">
+                    <div class="left">
+                        <img *ngIf="!song.running" src="assets/icons/play_w.png" class="play" (click)="playSong(i)" [matTooltip]="settings.language === 'es' ? 'Reproduce esta canción' : 'Play this song'">
+                        <img *ngIf="song.running" src="assets/icons/pause_w.png" class="pause" (click)="pauseSong(i)" [matTooltip]="settings.language === 'es' ? 'Pausa esta canción' : 'Pause this song'">
+                        <img [src]="song.image">
+                    </div>
+                    <div class="right">
+                    <div class="header">
+                        <div class="s-title" [title]="song.title">
+                        {{song.title}}
+                        </div>
+                        <div>
+                        <button mat-icon-button color="warn" [matTooltip]="settings.language === 'es' ? 'Elimina esta canción de tu historial' : 'Delete this song from your history'" (click)="deleteSong(i)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        </div>
+                    </div>
+                    <div class="tags" [title]="song.tags">{{song.tags}}</div>
+                    <div class="footer">
+                        <div class="duration">
+                            <div>
+                            {{getSongDuration(song.time)}}
+                            </div>
+                            <div>/</div>
+                            <div>
+                            {{getSongDuration(song.duration)}}
+                            </div>
+                        </div>
+                        <div *ngIf="song.lyrics !== '[Instrumental]'" class="lyrics">
+                            <button mat-icon-button [matTooltip]="settings.language === 'es' ? 'Ver letra de esta canción' : 'See lyrics of this song'" (click)="showLyrics(song)">
+                                <mat-icon>subtitles</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="footer">
+        <div class="left">
+            <div>© {{getYear()}}</div>
+            <a (click)="showCredits()">
+                <ng-container *ngIf="settings.language === 'es'">
+                    Créditos
+                </ng-container>
+                <ng-container *ngIf="settings.language === 'en'">
+                    Credits
+                </ng-container>
+            </a>
+        </div>
+        <div class="right">
+            <a href="https://github.com/MrFridunath/song-generator" target="_blank">GitHub</a>
+        </div>
+        </div>
+    </div>
+</div>
+  

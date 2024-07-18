@@ -1,0 +1,402 @@
+.layout {
+    display: flex;
+    justify-content: center;
+    min-height: 100%;
+}
+
+.layout-dark {
+    background-color: #000;
+    color: #fff;
+}
+
+.layout-white {
+    background-color: #adadad;
+    color: #000;
+}
+
+.main-container {
+    max-width: 1140px;
+    margin: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+}
+
+.header .left {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header .left img {
+    width: 20px;
+}
+
+.header .right {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.header .right .model {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+::ng-deep .header .right .model button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+::ng-deep .mat-mdc-slide-toggle {
+    color: #000 !important;
+}
+
+.footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex: 1 1 auto;
+    align-items: flex-end;
+}
+
+.footer .left {
+    display: flex;
+    gap: 20px;
+}
+
+.footer a {
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity ease-in-out .2s;
+}
+
+.layout-dark .footer a  {
+    color: #fff;
+}
+
+.layout-white .footer a  {
+    color: #000;
+}
+
+.footer a:hover {
+    opacity: 0.7;
+}
+
+::ng-deep .mat-mdc-menu-item-text {
+    display: flex;
+    gap: 20px;
+}
+
+.model-icon {
+    border-radius: 100%;
+    background-color: #fff;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.model-icon img {
+    max-height: 20px;
+}
+
+.menu-item {
+    display: flex;
+    gap: 20px;
+}
+
+.menu-item img {
+    max-height: 20px;
+}
+
+::ng-deep .mat-mdc-menu-content .title {
+    font-size: 18px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+::ng-deep .mat-mdc-menu-content .mat-mdc-slide-toggle .mdc-switch:enabled + .mdc-label {
+    font-size: 16px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content .title {
+    margin-top: 100px;
+    font-size: 50px;
+    font-weight: bold;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-width {
+    max-width: 600px;
+    width: 100%;
+}
+
+.content .custom {
+    margin-top: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.layout-dark .content .custom {
+    color: #fff;
+}
+
+.layout-white .content .custom {
+    color: #000;
+}
+
+.content .custom .left {
+    display: flex;
+    gap: 20px;
+}
+
+::ng-deep .layout-dark .left .mdc-label{
+    color: #fff;
+}
+
+::ng-deep .layout-white .left .mdc-label{
+    color: #000;
+}
+
+.content .card {
+    margin-top: 20px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.black-icon {
+    color: #000;
+}
+
+.card .options {
+    margin-top: 10px;
+}
+
+.card .options-m {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.card .options-l {
+    display: flex;
+}
+
+.card .options-l .loading-text {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 48px;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+}
+
+.submit {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.submit .gen-button {
+    transition: transform ease-in-out .2s; 
+    border: 1px solid gray; 
+}
+
+.layout-dark .submit .gen-button {
+    background-color: #fff;
+    color: #000;
+}
+
+.layout-white .submit .gen-button {
+    background-color: #000;
+    color: #fff;
+}
+
+.submit .gen-button:hover {
+    transform: scale(1.1);
+}
+
+.genre-chips {
+    margin-top: 10px;
+}
+
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.loading .wait {
+    margin-top: 30px;
+    text-align: center;
+}
+
+::ng-deep .layout-dark .mat-mdc-progress-spinner circle, ::ng-deep .layout-dark .mat-mdc-spinner circle {
+    stroke: #fff;
+}
+
+::ng-deep .layout-white .mat-mdc-progress-spinner circle, ::ng-deep .layout-white .mat-mdc-spinner circle {
+    stroke: #000;
+}
+
+::ng-deep .options .mat-mdc-progress-spinner circle, ::ng-deep .options .mat-mdc-spinner circle, ::ng-deep .options-m .mat-mdc-progress-spinner circle, ::ng-deep .options-m .mat-mdc-spinner circle {
+    stroke: #000;
+}
+
+/*
+::ng-deep .mdc-button {
+    background-color: #000 !important;
+}
+*/
+
+.disabled {
+    opacity: .5;
+}
+
+.history {
+    width: 100%;
+    margin-top: 50px;
+}
+
+.history .h-title {
+    font-size: 20px;
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+
+.history .song-container {
+    display: flex;
+    gap: 20px;
+    overflow: hidden;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.h-song {
+    display: flex;
+}
+
+.layout-dark .h-song {
+    border: solid 2px white;
+}
+
+.layout-white .h-song {
+    border: solid 2px black;
+    background: white;
+}
+
+.h-song .left {
+    display: flex;
+    position: relative;
+    width: 110px;
+}
+
+.h-song .left .play {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 35px;
+    height: 35px;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: all ease-in-out .2s;
+}
+
+.h-song .left .play:hover {
+    opacity: 1;
+}
+
+.h-song .left .pause {
+    position: absolute;
+    top: 37%;
+    left: 37%;
+    width: 35px;
+    height: 35px;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: all ease-in-out .2s;
+}
+
+.h-song .left .pause:hover {
+    opacity: 1;
+}
+
+.h-song .left img {
+    width: 100%;
+}
+
+.h-song .right {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.h-song .right .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.h-song .right .s-title {
+    font-size: 20px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 180px;
+}
+
+.h-song .right .tags {
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 230px;
+}
+
+.h-song .right .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.h-song .right .footer .duration {
+    font-size: 15px;
+    display: flex;
+    gap: 5px;
+}
+
+.gen-t-btn-opacity {
+    opacity: .2;
+}
